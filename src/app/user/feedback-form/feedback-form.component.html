@@ -1,0 +1,39 @@
+<p>Customer Feedback Form</p>
+<form [formGroup]="feedbackForm">
+    <!--- Name --->
+    <label>Name</label>
+    <input type="text" formControlName="name">
+    @if(feedbackForm.get('name')?.touched && feedbackForm.get('name')?.invalid) {
+        <div>
+            Name is required.
+        </div>
+    }
+
+    <br /> <br />
+
+    <!-- Ratings -->
+    <label>Ratings</label>
+    <select formControlName="ratings">
+        <option value="">Select</option>
+        @for(r of [1,2,3,4,5]; track r) {
+            <option [value]="r"> {{r}} </option>
+        }
+    </select>
+    @if(feedbackForm.get('ratings')?.touched && feedbackForm.get('ratings')?.invalid) {
+        <div> Rating is required. </div>
+    } 
+
+    <br /> <br />
+    <!-- Comments -->
+     <label>Comments</label>
+     <textarea formControlName="comment"></textarea>
+     @if(feedbackForm.get('comment')?.touched && feedbackForm.get('comment')?.invalid) {
+        <div> Comment must be atleast 5 characters long.</div>
+     }
+
+     <button #submitBtn type="submit" [disabled]="this.feedbackForm.invalid || loading">{{loading ? 'Submitting...' : 'Submit'}}</button>
+</form>
+    <div>{{message}}</div>
+    <div>{{errMsg}}</div>
+
+
