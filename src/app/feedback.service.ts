@@ -12,4 +12,8 @@ export class FeedbackService {
   addFeedback(data: any) {
     return this.http.post(this.apiUrl, data);
   }
+
+  getFeedbackList(query: string = '') {
+    return this.http.get<any[]>(this.apiUrl + `?q=${query}`);
+  }
 }
