@@ -13,7 +13,20 @@ export class FeedbackService {
     return this.http.post(this.apiUrl, data);
   }
 
-  getFeedbackList(query: string = '') {
-    return this.http.get<any[]>(this.apiUrl + `?q=${query}`);
+  getFeedbackList(query: string = '', ratings: number | null = null) {
+    let params: any = {};
+
+    if(query) {
+      params.query = query;
+    }
+
+    if(ratings !== null && ratings !== undefined) {
+      params.ratings = ratings;
+    }
+
+    console.log(params);
+    
+    // return this.http.get<any[]>(this.apiUrl + `?q=${query}`);
+    return this.http.get<any[]>(this.apiUrl, {params});
   }
 }

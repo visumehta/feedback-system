@@ -1,6 +1,28 @@
 <h2>Feedback List (Admin)</h2>
 
 <!-- Search -->
- <input type="text" [formControl]="searchControl" placeholder = "Search feedback..." />
+ <input type="text" [formControl]="searchControl" placeholder = "Search feedback..." /> &nbsp;
+ <!-- Rating filter -->
+ <select [formControl]="ratingFilter">
+     <option value = ''>All Ratings</option>
+     @for(r of [1,2,3,4,5]; track r) {
+         <option [value]="r">{{r}}</option>
+        }
+    </select>
+    
+    <br /> <br />
+ <!-- List -->
+  <ul>
+    @for(item of feedbackList; track item.id) {
+        <li>
+            <strong>{{item.name}}</strong>
+            (Rating: {{item.ratings}}) <br />
+            {{item.comment}}
+        <hr />
+        </li>
+    }
+  </ul>
+
+  
 
  
